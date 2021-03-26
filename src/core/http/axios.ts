@@ -1,4 +1,6 @@
 import axios from "axios";
+import AppConstants from "../../common/constants/AppConstants";
+
 import {
   requestErrorInterceptor,
   requestInterceptor,
@@ -6,9 +8,17 @@ import {
   responseInterceptor,
 } from "./axios.interceptor";
 
-axios.interceptors.request.use(requestInterceptor, requestErrorInterceptor);
-axios.interceptors.response.use(responseInterceptor, responseErrorInterceptor);
-
-export default axios.create({
-  baseURL: "http://localhost:8000",
+const axiosInstance = axios.create({
+  baseURL: AppConstants.BASE_URL,
 });
+
+axiosInstance.interceptors.request.use(
+  requestInterceptor,
+  requestErrorInterceptor
+);
+axiosInstance.interceptors.response.use(
+  responseInterceptor,
+  responseErrorInterceptor
+);
+
+export default axiosInstance;

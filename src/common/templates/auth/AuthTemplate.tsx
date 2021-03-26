@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Card, { CardVariant } from "../../components/Card";
+import Card from "../../components/Card";
 
 interface Props {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ function AuthTemplate({ children }: Props) {
   return (
     <AuthTemplateStyles>
       <section>
-        <Card variant={CardVariant.LIGHT}>{children}</Card>
+        <Card variant="light">{children}</Card>
       </section>
     </AuthTemplateStyles>
   );

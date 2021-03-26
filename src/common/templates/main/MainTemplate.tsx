@@ -18,6 +18,15 @@ const MainTemplateStyles = styled.div`
     height: calc(100vh - 9.25rem);
     border-radius: 2rem;
     padding: 2rem;
+    position: relative;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 24px;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--grey);
+    margin-bottom: 1.5rem;
   }
 `;
 

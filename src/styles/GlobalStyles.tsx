@@ -34,6 +34,14 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     background: var(--grey);
   }
+
+  .flex {
+    display: flex;
+  }
+
+  .jcsb {
+    justify-content:space-between;
+  }
 `;
 
 export default GlobalStyles;

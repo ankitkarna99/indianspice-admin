@@ -1,4 +1,4 @@
-export default class LocalStorageService {
+export default abstract class LocalStorageService {
   private static ACCESS_TOKEN: string = "INDIAN_SPICE_ACCESS_TOKEN";
 
   static clearTokens() {

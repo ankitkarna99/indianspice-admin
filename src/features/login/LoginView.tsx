@@ -4,13 +4,14 @@ import logo from "../../assets/images/brand/logo.png";
 import styled from "styled-components";
 import { Button, Form, Input } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import useLoginView from "./useLoginView";
 
 const LoginViewStyles = styled.div`
   padding: 1rem;
   .company {
     text-align: center;
     img {
-      width: 30%;
+      width: 100%;
     }
   }
 
@@ -24,7 +25,12 @@ const LoginViewStyles = styled.div`
 `;
 
 function LoginView() {
+  const { doLogin, apiManager } = useLoginView();
+
   const [form] = Form.useForm();
+  const onFinish = (values: any) => {
+    doLogin(values);
+  };
 
   return (
     <AuthTemplate>
@@ -33,7 +39,7 @@ function LoginView() {
           <img src={logo} />
         </div>
         <div className="login">
-          <Form form={form} layout="vertical">
+          <Form form={form} layout="vertical" onFinish={onFinish}>
             <Form.Item
               name="username"
               label="Username"
@@ -63,6 +69,7 @@ function LoginView() {
               htmlType="submit"
               type="primary"
               icon={<ArrowRightOutlined />}
+              loading={apiManager.busy}
               block
             >
               Login

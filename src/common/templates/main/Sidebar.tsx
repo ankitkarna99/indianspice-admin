@@ -4,8 +4,8 @@ import avatar from "../../../assets/images/users/avatar.png";
 import logo from "../../../assets/images/brand/logo.png";
 import { NavLink } from "react-router-dom";
 import SidebarListTile from "./components/SidebarListTile";
-import { FiActivity } from "react-icons/fi";
-import { IoLayers, IoLogOutOutline } from "react-icons/io5";
+import { FiActivity, FiImage } from "react-icons/fi";
+import { IoImage, IoLayers, IoLogOutOutline } from "react-icons/io5";
 
 const SidebarStyles = styled.section`
   .company {
@@ -44,21 +44,22 @@ function Sidebar() {
       </div>
       <div className="user-pane">
         <img src={avatar} />
-        <h3>Sulav Ad</h3>
-        <p>Hamro Service Admin</p>
+        <h3>Root User</h3>
+        <p>Indian Spice Admin</p>
       </div>
       <nav>
-        <NavLink to="/" activeClassName="sidebar-link-active" exact>
+        <NavLink to="/home" activeClassName="sidebar-link-active" exact>
           <SidebarListTile Icon={FiActivity} text="Dashboard" />
         </NavLink>
-        <NavLink to="/products" activeClassName="sidebar-link-active">
-          <SidebarListTile Icon={IoLayers} text="Products" />
+        <NavLink to="/categories" activeClassName="sidebar-link-active">
+          <SidebarListTile Icon={IoLayers} text="Categories" />
         </NavLink>
-        <SidebarListTile
-          Icon={IoLogOutOutline}
-          onClick={() => {}}
-          text="Logout"
-        />
+        <NavLink to="/gallery" activeClassName="sidebar-link-active">
+          <SidebarListTile Icon={IoImage} text="Gallery" />
+        </NavLink>
+        <NavLink to="/carousel" activeClassName="sidebar-link-active">
+          <SidebarListTile Icon={FiImage} text="Carousel" />
+        </NavLink>
       </nav>
     </SidebarStyles>
   );
