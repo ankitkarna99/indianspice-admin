@@ -13,6 +13,10 @@ export default class CategoryApi {
     return axios.get("/category");
   }
 
+  static addCategory(category: CategoryModel): Promise<CommonModel> {
+    return axios.post("/category", category);
+  }
+
   static updateCategory(category: CategoryModel): Promise<CommonModel> {
     const { id, ...data } = category;
     return axios.patch("/category/" + id, data);

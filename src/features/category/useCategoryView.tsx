@@ -14,6 +14,8 @@ function useCategoryView() {
     setSelectedCategory,
   ] = React.useState<CategoryModel | null>(null);
   const [isModalOpen, setModalOpen] = React.useState(false);
+  const [isAddModalOpen, setAddModalOpen] = React.useState(false);
+  const [isAddingCategory, setAddingCategory] = React.useState(false);
   const [isUpdatingCategory, setUpdatingCategory] = React.useState(false);
   const [form] = useForm();
 
@@ -40,6 +42,23 @@ function useCategoryView() {
     }
   };
 
+  const addCategory = async (category: CategoryModel) => {
+    try {
+      setAddingCategory(true);
+
+      const response = await apiManager.execute(
+        CategoryApi.addCategory(category)
+      );
+
+      setAddingCategory(false);
+      setAddModalOpen(false);
+      NotificationService.showNotification("success", response.message);
+      getCategories();
+    } catch (err) {
+      setAddingCategory(false);
+    }
+  };
+
   const getCategories = async () => {
     try {
       const response = await apiManager.fetch(CategoryApi.getAllCategories());
@@ -62,6 +81,10 @@ function useCategoryView() {
     setModalOpen,
     isUpdatingCategory,
     form,
+    isAddModalOpen,
+    setAddModalOpen,
+    isAddingCategory,
+    addCategory
   };
 }
 

@@ -16,6 +16,10 @@ export default abstract class DishApi {
     return axios.get("/dish/" + id);
   }
 
+  static addDish(dish: DishModel): Promise<CommonModel> {
+    return axios.post("/dish", dish);
+  }
+
   static updateDish(dish: DishModel): Promise<CommonModel> {
     const { id, ...data } = dish;
     return axios.patch("/dish/" + id, data);

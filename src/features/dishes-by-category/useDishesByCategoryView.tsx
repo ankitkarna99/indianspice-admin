@@ -11,12 +11,14 @@ import NotificationService from "../../core/services/NotificationService";
 function useDishesByCategoryView() {
   const apiManager = useApi();
   const [dishes, setDishes] = React.useState<DishModel[]>([]);
+  const [addingDish, setAddingDish] = React.useState<boolean>(false);
   const [updatingDish, setUpdatingDish] = React.useState<boolean>(false);
   const [selectedDish, setSelectedDish] = React.useState<DishModel | null>(
     null
   );
   const [categories, setCategories] = React.useState<CategoryModel[]>([]);
   const [isModalOpen, setModalOpen] = React.useState<boolean>(false);
+  const [isAddModalOpen, setAddModalOpen] = React.useState<boolean>(false);
   const [form] = useForm();
   const { id } = useParams<{ id: string }>();
 
@@ -37,6 +39,19 @@ function useDishesByCategoryView() {
       getDishesByCategory();
       NotificationService.showNotification("success", response.message);
     } catch (e) {}
+  };
+
+  const addDish = async (dish: DishModel) => {
+    setAddingDish(true);
+    try {
+      const response = await apiManager.execute(DishApi.addDish(dish));
+      setAddingDish(false);
+      setAddModalOpen(false);
+      getDishesByCategory();
+      NotificationService.showNotification("success", response.message);
+    } catch (e) {
+      setAddingDish(false);
+    }
   };
 
   const updateDish = async (dish: DishModel) => {
@@ -78,7 +93,13 @@ function useDishesByCategoryView() {
     updateDish,
     openEditModal,
     updatingDish,
+    addingDish,
     deleteDish,
+    isAddModalOpen,
+    setAddModalOpen,
+    setSelectedDish,
+    addDish,
+    id
   };
 }
 

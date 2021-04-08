@@ -30,6 +30,10 @@ function CategoryView() {
     updateCategory,
     isUpdatingCategory,
     form,
+    addCategory,
+    isAddModalOpen,
+    setAddModalOpen,
+    isAddingCategory
   } = useCategoryView();
 
   return (
@@ -48,7 +52,15 @@ function CategoryView() {
       )}
       {!apiManager.hasError && !apiManager.busy && (
         <>
-          <div className="title">App Categories</div>
+          <div className="title flex jcsb">
+            <div>
+              App Categories
+            </div>
+            <Button type="primary" onClick={() => {
+              form.resetFields();
+              setAddModalOpen(true);
+            }}>Add Category</Button>
+          </div>
           <CategoryViewStyles>
             {categories.map((category) => (
               <CategoryItem
@@ -64,15 +76,59 @@ function CategoryView() {
       <Modal
         title="Update Category"
         visible={isModalOpen}
-        onOk={() => {
-          updateCategory({
+        onOk={async () => {
+          return updateCategory({
             ...form.getFieldsValue(),
-            id: selectedCategory?.id,
+             id: selectedCategory?.id,
           });
         }}
         confirmLoading={isUpdatingCategory}
         onCancel={() => {
           setModalOpen(false);
+        }}
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item
+            name="name"
+            label="Name"
+            rules={[
+              {
+                required: true,
+                message: "Name is required.",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="URL"
+            name="url"
+            rules={[{ required: true, message: "URL is required." }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Sort Order"
+            name="sort_order"
+            rules={[{ required: true, message: "Sort order is required." }]}
+          >
+            <Input type="number" />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title="Add Category"
+        visible={isAddModalOpen}
+        onOk={() => {
+          addCategory({
+            ...form.getFieldsValue(),
+            id: selectedCategory?.id,
+          });
+        }}
+        confirmLoading={isAddingCategory}
+        onCancel={() => {
+          setAddModalOpen(false);
         }}
       >
         <Form form={form} layout="vertical">

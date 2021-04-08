@@ -1,17 +1,9 @@
-import { Button, Modal, Spin, Form, Input, Select, Switch, Drawer } from "antd";
-import { useForm } from "antd/lib/form/Form";
+import { Button, Spin, Form, Input, Select, Switch, Drawer } from "antd";
 import FormItem from "antd/lib/form/FormItem";
-import React from "react";
-import DataTable from "react-data-table-component";
-import { FiArrowUp, FiEdit, FiTrash } from "react-icons/fi";
 import styled from "styled-components";
-import Card from "../../common/components/Card";
 import Center from "../../common/components/Center";
-import IconButton from "../../common/components/IconButton";
 import MainTemplate from "../../common/templates/main/MainTemplate";
 import useConfigView from "./useConfigView";
-
-const { Option } = Select;
 
 const ConfigViewStyles = styled.div`
   display: grid;

@@ -4,7 +4,7 @@ import avatar from "../../../assets/images/users/avatar.png";
 import logo from "../../../assets/images/brand/logo.png";
 import { NavLink } from "react-router-dom";
 import SidebarListTile from "./components/SidebarListTile";
-import { FiActivity, FiImage } from "react-icons/fi";
+import { FiActivity, FiBook, FiImage, FiList, FiTag } from "react-icons/fi";
 import { IoImage, IoLayers, IoLogOutOutline } from "react-icons/io5";
 
 const SidebarStyles = styled.section`
@@ -51,6 +51,9 @@ function Sidebar() {
         <NavLink to="/home" activeClassName="sidebar-link-active" exact>
           <SidebarListTile Icon={FiActivity} text="Dashboard" />
         </NavLink>
+        <NavLink to="/orders" activeClassName="sidebar-link-active">
+          <SidebarListTile Icon={FiList} text="Orders" />
+        </NavLink>
         <NavLink to="/categories" activeClassName="sidebar-link-active">
           <SidebarListTile Icon={IoLayers} text="Categories" />
         </NavLink>
@@ -59,6 +62,12 @@ function Sidebar() {
         </NavLink>
         <NavLink to="/carousel" activeClassName="sidebar-link-active">
           <SidebarListTile Icon={FiImage} text="Carousel" />
+        </NavLink>
+        <NavLink to="/page" activeClassName="sidebar-link-active">
+          <SidebarListTile Icon={FiBook} text="Pages" />
+        </NavLink>
+        <NavLink to="/promo" activeClassName="sidebar-link-active">
+          <SidebarListTile Icon={FiTag} text="Promo Codes" />
         </NavLink>
       </nav>
     </SidebarStyles>

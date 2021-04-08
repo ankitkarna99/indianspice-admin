@@ -7,7 +7,10 @@ import DishesByCategoryView from "../../features/dishes-by-category/DishesByCate
 import GalleryView from "../../features/gallery/GalleryView";
 import HomeView from "../../features/home/HomeView";
 import LoginView from "../../features/login/LoginView";
+import OrderView from "../../features/order/OrderView";
+import PageView from "../../features/page/PageView";
 import ProductsView from "../../features/products/ProductsView";
+import PromoView from "../../features/promo/PromoView";
 import LocalStorageService from "../services/LocalStorageService";
 
 function Router() {
@@ -28,11 +31,14 @@ function Router() {
         <Route path="/login" component={LoginView} exact />
         <Route path="/home" component={HomeView} exact />
         <Route path="/categories" component={CategoryView} exact />
+        <Route path="/orders" component={OrderView} exact />
         <Route path="/categories/:id" component={DishesByCategoryView} exact />
         <Route path="/products" component={ProductsView} exact />
         <Route path="/config" component={ConfigView} exact />
         <Route path="/gallery" component={GalleryView} exact />
         <Route path="/carousel" component={CarouselView} exact />
+        <Route path="/page" component={PageView} exact />
+        <Route path="/promo" component={PromoView} exact />
       </Switch>
     </BrowserRouter>
   );

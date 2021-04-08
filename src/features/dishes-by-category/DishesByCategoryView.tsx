@@ -16,6 +16,7 @@ const DishesByCategoryViewStyles = styled.div``;
 
 function DishesByCategoryView() {
   const {
+    id,
     apiManager,
     dishes,
     getDishesByCategory,
@@ -24,10 +25,15 @@ function DishesByCategoryView() {
     categories,
     selectedDish,
     updateDish,
+    addDish,
+    addingDish,
     setModalOpen,
     openEditModal,
     deleteDish,
     isModalOpen,
+    isAddModalOpen,
+    setAddModalOpen,
+    setSelectedDish
   } = useDishesByCategoryView();
 
   const columns = [
@@ -87,6 +93,7 @@ function DishesByCategoryView() {
         <DishesByCategoryViewStyles>
           <DataTable
             title="Dishes"
+            actions={<div><Button type="primary" onClick={() => {setSelectedDish(null); form.resetFields(); form.setFieldsValue({display: "1",category_id: parseInt(id)}); setAddModalOpen(true);}}>Add Dish</Button></div>}
             columns={columns}
             data={dishes}
             defaultSortField="title"
@@ -97,7 +104,7 @@ function DishesByCategoryView() {
       )}
 
       <Drawer
-        title="Update Category"
+        title="Update Dish"
         footer={
           <Button
             type="primary"
@@ -118,6 +125,83 @@ function DishesByCategoryView() {
         width="30%"
         onClose={() => {
           setModalOpen(false);
+        }}
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: "name is required." }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[{ required: true, message: "Description is required." }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Price"
+            name="price"
+            rules={[{ required: true, message: "Price is required." }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Spicy"
+            name="spicy"
+            rules={[{ required: true, message: "Spicy is required." }]}
+            valuePropName="checked"
+          >
+            <Switch />
+          </Form.Item>
+          <Form.Item
+            label="Display"
+            name="display"
+            rules={[{ required: true, message: "Display is required." }]}
+            valuePropName="checked"
+          >
+            <Switch />
+          </Form.Item>
+          <Form.Item
+            label="Category"
+            name="category_id"
+            rules={[{ required: true, message: "Category_id is required." }]}
+          >
+            <Select>
+              {categories.map((category) => (
+                <Option key={category.id} value={category.id}>
+                  {category.name}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Form>
+      </Drawer>
+      <Drawer
+        title="Add Dish"
+        footer={
+          <Button
+            type="primary"
+            loading={addingDish}
+            onClick={() =>
+              addDish({
+                ...form.getFieldsValue(),
+                id: 1,
+                spicy: form.getFieldValue("spicy") == true ? "1" : "0",
+                display: form.getFieldValue("display") == true ? "1" : "0",
+              })
+            }
+          >
+            Add Dish
+          </Button>
+        }
+        visible={isAddModalOpen}
+        width="30%"
+        onClose={() => {
+          setAddModalOpen(false);
         }}
       >
         <Form form={form} layout="vertical">
